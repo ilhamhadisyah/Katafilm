@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ilham.moviesandtvshow.data.model.Movie
+import com.ilham.moviesandtvshow.data.model.TVShow
 import com.ilham.moviesandtvshow.databinding.FragmentTVShowBinding
 import com.ilham.moviesandtvshow.viewadapter.TVShowAdapter
 import com.ilham.moviesandtvshow.viewmodel.HomeViewModel
@@ -32,7 +33,7 @@ class TVShowFragment : Fragment() {
             this,
             ViewModelProvider.NewInstanceFactory()
         )[HomeViewModel::class.java]
-        viewModel.getMoviedata().observe(this, {
+        viewModel.getTvData().observe(this, {
             if (it.isNullOrEmpty()) {
                 Toast.makeText(context, "Data Not Found", Toast.LENGTH_SHORT).show()
             } else {
@@ -43,7 +44,7 @@ class TVShowFragment : Fragment() {
 
     }
 
-    private fun setUi(movieList: ArrayList<Movie>) {
+    private fun setUi(movieList: ArrayList<TVShow>) {
         binding.apply {
             rvTvShow.layoutManager = LinearLayoutManager(context)
             tvAdapter = TVShowAdapter(arrayListOf())

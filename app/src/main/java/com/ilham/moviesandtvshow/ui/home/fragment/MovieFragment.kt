@@ -34,7 +34,7 @@ class MovieFragment : Fragment() {
             this,
             ViewModelProvider.NewInstanceFactory()
         )[HomeViewModel::class.java]
-        viewModel.getMoviedata().observe(this, {
+        viewModel.getMovieData().observe(this, {
             if (it.isNullOrEmpty()) {
                 Toast.makeText(context, "Data Not Found", Toast.LENGTH_SHORT).show()
             }else{

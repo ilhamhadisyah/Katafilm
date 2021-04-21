@@ -2,51 +2,52 @@ package com.ilham.moviesandtvshow.data
 
 import com.ilham.moviesandtvshow.R
 import com.ilham.moviesandtvshow.data.model.Movie
+import com.ilham.moviesandtvshow.data.model.TVShow
 
 object TVShowData {
-    private val movieTitle = arrayOf(
-        "A Star is Born",
-        "Alita: Battle Angel",
-        "Aquaman",
-        "Bohemian Rhapsody",
-        "Cold Pursuit",
-        "Creed",
-        "Fantastic Beasts: The Crimes of Grindelwald",
-        "Glass",
-        "How to Train Your Dragon: The Hidden World",
-        "Avengers: Infinity War",
-        "Mary Queen of Scots",
-        "Master Z: Ip Man Legacy",
-        "Mortal Engines",
-        "Overlord",
-        "Wreck-It Ralph",
-        "Robin Hood",
-        "Serenity",
-        "Spiderman",
-        "T-34"
+    private val tvTitle = arrayOf(
+        "Arrow",
+        "Doom Patrol",
+        "Dragon Ball",
+        "Fairytail",
+        "Family Guy",
+        "Flash",
+        "God",
+        "Gotham",
+        "Grey Anatomy",
+        "Hanna",
+        "Iron Fist",
+        "Naruto Shipudden",
+        "NCIS",
+        "Riverdale",
+        "Shameless",
+        "Super-Girl",
+        "Super-Natural",
+        "The Simpson",
+        "The Umbrella"
     )
-    private val moviePoster = intArrayOf(
-        R.drawable.poster_a_star_is_born,
-        R.drawable.poster_alita,
-        R.drawable.poster_aquaman,
-        R.drawable.poster_bohemian,
-        R.drawable.poster_cold_persuit,
-        R.drawable.poster_creed,
-        R.drawable.poster_crimes,
-        R.drawable.poster_glass,
-        R.drawable.poster_how_to_train,
-        R.drawable.poster_infinity_war,
-        R.drawable.poster_marry_queen,
-        R.drawable.poster_master_z,
-        R.drawable.poster_mortal_engines,
-        R.drawable.poster_overlord,
-        R.drawable.poster_ralph,
-        R.drawable.poster_robin_hood,
-        R.drawable.poster_serenity,
-        R.drawable.poster_spiderman,
-        R.drawable.poster_t34
+    private val tvPoster = intArrayOf(
+        R.drawable.poster_arrow,
+        R.drawable.poster_doom_patrol,
+        R.drawable.poster_dragon_ball,
+        R.drawable.poster_fairytail,
+        R.drawable.poster_family_guy,
+        R.drawable.poster_flash,
+        R.drawable.poster_god,
+        R.drawable.poster_gotham,
+        R.drawable.poster_grey_anatomy,
+        R.drawable.poster_hanna,
+        R.drawable.poster_iron_fist,
+        R.drawable.poster_naruto_shipudden,
+        R.drawable.poster_ncis,
+        R.drawable.poster_riverdale,
+        R.drawable.poster_shameless,
+        R.drawable.poster_supergirl,
+        R.drawable.poster_supernatural,
+        R.drawable.poster_the_simpson,
+        R.drawable.poster_the_umbrella
     )
-    private val moviePopularity = doubleArrayOf(
+    private val tvPopularity = doubleArrayOf(
         7.5,
         7.2,
         6.9,
@@ -110,7 +111,7 @@ object TVShowData {
         "ID",
         "RU"
     )
-    private val movieOverview = arrayOf(
+    private val tvOverview = arrayOf(
         "Seasoned musician Jackson Maine discovers — and falls in love with — struggling artist Ally. She has just about given up on her dream to make it big as a singer — until Jack coaxes her into the spotlight. But even as Ally's career takes off, the personal side of their relationship is breaking down, as Jack fights an ongoing battle with his own internal demons.",
         "When Alita awakens with no memory of who she is in a future world she does not recognize, she is taken in by Ido, a compassionate doctor who realizes that somewhere in this abandoned cyborg shell is the heart and soul of a young woman with an extraordinary past.",
         "Once home to the most advanced civilization on Earth, Atlantis is now an underwater kingdom ruled by the power-hungry King Orm. With a vast army at his disposal, Orm plans to conquer the remaining oceanic people and then the surface world. Standing in his way is Arthur Curry, Orm's half-human, half-Atlantean brother and true heir to the throne.",
@@ -154,16 +155,16 @@ object TVShowData {
     )
     private val age =
         arrayOf(18, "PG-13", "PG-13", "PG-13", "PG-13", "PG-13", "PG-13", "13", "PG-13", "PG-13", "PG-13", "PG-13", "PG-13", "R", "PG", "PG-13", "R", "PG-13", "12")
-    val listMovie: ArrayList<Movie>
+    val listTV: ArrayList<TVShow>
         get() {
-            val list = arrayListOf<Movie>()
-            for (position in movieTitle.indices) {
-                val data = Movie()
-                data.title = movieTitle[position]
-                data.poster = moviePoster[position]
+            val list = arrayListOf<TVShow>()
+            for (position in tvTitle.indices) {
+                val data = TVShow()
+                data.title = tvTitle[position]
+                data.poster = tvPoster[position]
                 data.originalLang = originalLanguage[position]
-                data.score = moviePopularity[position]
-                data.overView = movieOverview[position]
+                data.score = tvPopularity[position]
+                data.overView = tvOverview[position]
                 data.genre = movieGenre[position]
                 data.age = age[position].toString()
                 data.releaseYear = releaseYear[position].toString()
@@ -172,7 +173,7 @@ object TVShowData {
             return list
         }
 
-    fun getMovieDetail(position : Int):Movie{
-        return listMovie[position]
+    fun getTvDetail(position : Int):TVShow{
+        return listTV[position]
     }
 }

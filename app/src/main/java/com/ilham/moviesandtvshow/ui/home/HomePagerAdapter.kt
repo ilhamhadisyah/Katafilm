@@ -1,10 +1,12 @@
-package com.ilham.moviesandtvshow
+package com.ilham.moviesandtvshow.ui.home
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.ilham.moviesandtvshow.ui.home.fragment.MovieFragment
+import com.ilham.moviesandtvshow.ui.home.fragment.TVShowFragment
 
-class MainPagerAdapter(appCompatActivity: AppCompatActivity) :
+class HomePagerAdapter(appCompatActivity: AppCompatActivity) :
     FragmentStateAdapter(appCompatActivity) {
     override fun getItemCount(): Int = 2
 

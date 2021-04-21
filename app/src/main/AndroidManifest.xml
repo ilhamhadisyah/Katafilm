@@ -9,25 +9,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MoviesAndTVShow">
-        <activity
-            android:name=".ui.detail.DetailActivity"
-            android:label="@string/title_activity_detail"
-            android:theme="@style/Theme.MoviesAndTVShow.NoActionBar">
+        <activity android:name=".ui.setting.Setting"
+            android:parentActivityName=".ui.home.HomeActivity"/>
 
-        </activity>
-        <activity
-            android:name=".ui.detail.TvShowDetailActivity"
-            android:label="@string/title_activity_detail"
-            android:theme="@style/Theme.MoviesAndTVShow.NoActionBar">
-
-        </activity>
-        <activity android:name=".ui.home.HomeActivity">
+        <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.detail.DetailActivity"
+            android:theme="@style/Theme.MoviesAndTVShow.NoActionBar" />
+
+        <activity
+            android:name=".ui.detail.TvShowDetailActivity"
+            android:theme="@style/Theme.MoviesAndTVShow.NoActionBar" />
+
+        <activity android:name=".ui.home.HomeActivity"/>
 
         <meta-data
             android:name="preloaded_fonts"

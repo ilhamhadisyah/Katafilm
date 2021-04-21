@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Movies And TV Show</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="movie">Film</string>
+    <string name="tv">Acara TV</string>
+    <string name="trending_now">Sedang Tren</string>
+    <string name="title">This is Dump Title</string>
+    <string name="action_settings">Pengaturan</string>
+    <string name="overview">Gambaran</string>
+    <string name="year_release">tahun rilis</string>
+    <string name="hot_tv_series">Tren Acara TV</string>
+    <string name="language_setting">Ganti Bahasa</string>
+</resources>

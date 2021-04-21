@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ilham.moviesandtvshow.viewmodel.HomeViewModel
 import com.ilham.moviesandtvshow.viewadapter.MovieAdapter
 import com.ilham.moviesandtvshow.data.model.Movie
 import com.ilham.moviesandtvshow.databinding.FragmentMovieBinding
+import com.ilham.moviesandtvshow.viewmodel.HomeViewModel
 
 
 class MovieFragment : Fragment() {
@@ -34,13 +34,13 @@ class MovieFragment : Fragment() {
             this,
             ViewModelProvider.NewInstanceFactory()
         )[HomeViewModel::class.java]
-        viewModel.getMovieData().observe(this, {
+        viewModel.getMovieData().observe(this) {
             if (it.isNullOrEmpty()) {
                 Toast.makeText(context, "Data Not Found", Toast.LENGTH_SHORT).show()
-            }else{
+            } else {
                 setUi(it)
             }
-        })
+        }
     }
 
     private fun setUi(movieList: ArrayList<Movie>) {

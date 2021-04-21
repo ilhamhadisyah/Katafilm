@@ -35,13 +35,11 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/poster_serenity" />
 
-                <FrameLayout
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="200dp"
-                    android:background="@drawable/gradient_poster_overlay">
-
-                </FrameLayout>
+                    android:background="@drawable/gradient_poster_overlay"/>
             </FrameLayout>
 
             <androidx.appcompat.widget.Toolbar

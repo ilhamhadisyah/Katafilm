@@ -45,6 +45,7 @@ class MovieFragment : Fragment() {
 
     private fun setUi(movieList: ArrayList<Movie>) {
         binding.apply {
+            onLoadingShimmer()
             rvMovie.layoutManager = LinearLayoutManager(context)
             movieAdapter = MovieAdapter(arrayListOf())
             movieAdapter.apply {
@@ -52,6 +53,25 @@ class MovieFragment : Fragment() {
                 notifyDataSetChanged()
             }
             rvMovie.adapter = movieAdapter
+            onLoadedShimmer()
         }
+    }
+
+    private fun FragmentMovieBinding.onLoadingShimmer() {
+        rvMovie.visibility = View.GONE
+        shimmerAsProgressbar.apply {
+            startShimmer()
+            visibility = View.VISIBLE
+        }
+
+    }
+    private fun FragmentMovieBinding.onLoadedShimmer() {
+        rvMovie.visibility = View.VISIBLE
+        shimmerAsProgressbar.apply {
+            visibility = View.GONE
+            stopShimmer()
+            clearAnimation()
+        }
+
     }
 }

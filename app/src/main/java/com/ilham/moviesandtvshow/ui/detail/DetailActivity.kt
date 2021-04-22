@@ -2,7 +2,10 @@ package com.ilham.moviesandtvshow.ui.detail
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -11,6 +14,9 @@ import com.ilham.moviesandtvshow.R
 import com.ilham.moviesandtvshow.data.model.Movie
 import com.ilham.moviesandtvshow.databinding.ActivityDetailBinding
 import com.ilham.moviesandtvshow.viewmodel.DetailViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
 class DetailActivity : AppCompatActivity() {
@@ -50,6 +56,7 @@ class DetailActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     fun bind(movie: Movie) {
+
         binding.apply {
             val scoreTemp = movie.score?.div(2)
             val scoreScale = (scoreTemp?.times(10.0)?.roundToInt()?.div(10.0))
@@ -64,6 +71,7 @@ class DetailActivity : AppCompatActivity() {
                 contentMovieTitle.text = movie.title
             }
         }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

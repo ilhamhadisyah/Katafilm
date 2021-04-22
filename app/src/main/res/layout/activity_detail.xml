@@ -25,6 +25,7 @@
             app:toolbarId="@+id/toolbar">
 
             <FrameLayout
+                android:id="@+id/poster_image_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -33,13 +34,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/poster_serenity" />
+                    android:contentDescription="@string/poster_image" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="200dp"
-                    android:background="@drawable/gradient_poster_overlay"/>
+                    android:background="@drawable/gradient_poster_overlay" />
             </FrameLayout>
 
             <androidx.appcompat.widget.Toolbar
@@ -54,5 +55,6 @@
 
     <include
         android:id="@+id/child"
-        layout="@layout/content_scrolling" />
+        layout="@layout/detail_activity_content" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -56,5 +56,5 @@
 
     <include
         android:id="@+id/child"
-        layout="@layout/content_scrolling" />
+        layout="@layout/detail_activity_content" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

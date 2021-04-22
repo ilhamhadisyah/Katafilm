@@ -7,6 +7,9 @@ import com.ilham.moviesandtvshow.data.MovieData
 import com.ilham.moviesandtvshow.data.TVShowData
 import com.ilham.moviesandtvshow.data.model.Movie
 import com.ilham.moviesandtvshow.data.model.TVShow
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class DetailViewModel : ViewModel() {
     private val movieDetail = MutableLiveData<Movie>()

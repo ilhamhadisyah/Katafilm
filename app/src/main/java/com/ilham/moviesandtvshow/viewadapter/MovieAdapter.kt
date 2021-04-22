@@ -11,14 +11,15 @@ import com.ilham.moviesandtvshow.databinding.MovieItemViewBinding
 import com.ilham.moviesandtvshow.ui.detail.DetailActivity
 import kotlin.math.roundToInt
 
-class MovieAdapter(private var listMovie : ArrayList<Movie>) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(private var listMovie: ArrayList<Movie>) :
+    RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     fun setMovieData(movie: ArrayList<Movie>?) {
         if (movie == null) return
         this.listMovie.clear()
         this.listMovie.addAll(movie)
     }
-    
+
     inner class MovieViewHolder(private val binding: MovieItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
@@ -36,8 +37,8 @@ class MovieAdapter(private var listMovie : ArrayList<Movie>) : RecyclerView.Adap
                 yearRelease.text = movie.releaseYear
                 itemView.setOnClickListener {
                     val position = adapterPosition
-                    val intent = Intent(itemView.context,DetailActivity::class.java)
-                    intent.putExtra(DetailActivity.EXTRA_MOVIE_DATA,position)
+                    val intent = Intent(itemView.context, DetailActivity::class.java)
+                    intent.putExtra(DetailActivity.EXTRA_MOVIE_DATA, position)
                     itemView.context.startActivity(intent)
                 }
             }

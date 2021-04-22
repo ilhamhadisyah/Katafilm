@@ -6,25 +6,24 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.ilham.moviesandtvshow.data.model.Movie
 import com.ilham.moviesandtvshow.data.model.TVShow
 import com.ilham.moviesandtvshow.databinding.MovieItemViewBinding
-import com.ilham.moviesandtvshow.ui.detail.DetailActivity
 import com.ilham.moviesandtvshow.ui.detail.TvShowDetailActivity
 import kotlin.math.roundToInt
 
-class TVShowAdapter(private var listShowTV : ArrayList<TVShow>) : RecyclerView.Adapter<TVShowAdapter.MovieViewHolder>() {
+class TVShowAdapter(private var listShowTV: ArrayList<TVShow>) :
+    RecyclerView.Adapter<TVShowAdapter.MovieViewHolder>() {
 
     fun setTVShowData(tv: ArrayList<TVShow>?) {
         if (tv == null) return
         this.listShowTV.clear()
         this.listShowTV.addAll(tv)
     }
-    
+
     inner class MovieViewHolder(private val binding: MovieItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(tvSeries: TVShow   ) {
+        fun bind(tvSeries: TVShow) {
             binding.apply {
                 val scoreTemp = tvSeries.score?.div(2)
                 val scoreScale = (scoreTemp?.times(10.0)?.roundToInt()?.div(10.0))
@@ -38,8 +37,8 @@ class TVShowAdapter(private var listShowTV : ArrayList<TVShow>) : RecyclerView.A
                 yearRelease.text = tvSeries.releaseYear
                 itemView.setOnClickListener {
                     val position = adapterPosition
-                    val intent = Intent(itemView.context,TvShowDetailActivity::class.java)
-                    intent.putExtra(TvShowDetailActivity.EXTRA_MOVIE_DATA,position)
+                    val intent = Intent(itemView.context, TvShowDetailActivity::class.java)
+                    intent.putExtra(TvShowDetailActivity.EXTRA_MOVIE_DATA, position)
                     itemView.context.startActivity(intent)
                 }
             }

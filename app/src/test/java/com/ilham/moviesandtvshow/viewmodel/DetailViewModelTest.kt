@@ -19,34 +19,43 @@ import org.mockito.junit.MockitoJUnitRunner
 class DetailViewModelTest {
     private lateinit var movieViewModel: DetailViewModel
     private lateinit var tvViewModel: DetailViewModel
+
     @Mock
-    lateinit var movieDataObserver : Observer<Movie>
+    lateinit var movieDataObserver: Observer<Movie>
+
     @Mock
-    lateinit var tvDataObserver : Observer<TVShow>
+    lateinit var tvDataObserver: Observer<TVShow>
 
     @Before
-    fun setUp(){
+    fun setUp() {
         movieViewModel = DetailViewModel()
         tvViewModel = DetailViewModel()
         movieViewModel.getMovieDataDetails(1).observeForever(movieDataObserver)
         tvViewModel.getTVDataDetails(1).observeForever(tvDataObserver)
     }
+
     @get:Rule
     val rule = InstantTaskExecutorRule()
 
     @Test
     fun getMovieDataDetails() {
         val getFirstIndexData = MovieData.getMovieDetail(0)
-        assertEquals(getFirstIndexData,movieViewModel.getMovieDataDetails(0).value)
-        val getLastIndexData = MovieData.getMovieDetail(MovieData.listMovie.size-1)
-        assertEquals(getLastIndexData,movieViewModel.getMovieDataDetails(MovieData.listMovie.size-1).value)
+        assertEquals(getFirstIndexData, movieViewModel.getMovieDataDetails(0).value)
+        val getLastIndexData = MovieData.getMovieDetail(MovieData.listMovie.size - 1)
+        assertEquals(
+            getLastIndexData,
+            movieViewModel.getMovieDataDetails(MovieData.listMovie.size - 1).value
+        )
     }
 
     @Test
     fun getTVDataDetails() {
         val getFirstIndexData = TVShowData.getTvDetail(0)
-        assertEquals(getFirstIndexData,tvViewModel.getTVDataDetails(0).value)
-        val getLastIndexData = TVShowData.getTvDetail(TVShowData.listTV.size-1)
-        assertEquals(getLastIndexData,tvViewModel.getTVDataDetails(TVShowData.listTV.size-1).value)
+        assertEquals(getFirstIndexData, tvViewModel.getTVDataDetails(0).value)
+        val getLastIndexData = TVShowData.getTvDetail(TVShowData.listTV.size - 1)
+        assertEquals(
+            getLastIndexData,
+            tvViewModel.getTVDataDetails(TVShowData.listTV.size - 1).value
+        )
     }
 }

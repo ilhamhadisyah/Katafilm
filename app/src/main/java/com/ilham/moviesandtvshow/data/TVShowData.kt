@@ -1,7 +1,6 @@
 package com.ilham.moviesandtvshow.data
 
 import com.ilham.moviesandtvshow.R
-import com.ilham.moviesandtvshow.data.model.Movie
 import com.ilham.moviesandtvshow.data.model.TVShow
 
 object TVShowData {

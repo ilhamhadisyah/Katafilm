@@ -8,7 +8,7 @@ import com.ilham.moviesandtvshow.data.TVShowData
 import com.ilham.moviesandtvshow.data.model.Movie
 import com.ilham.moviesandtvshow.data.model.TVShow
 
-class  HomeViewModel : ViewModel() {
+class HomeViewModel : ViewModel() {
     private val movieList = MutableLiveData<ArrayList<Movie>>()
     private val tvList = MutableLiveData<ArrayList<TVShow>>()
 
@@ -16,7 +16,8 @@ class  HomeViewModel : ViewModel() {
         movieList.postValue(MovieData.listMovie)
         return movieList
     }
-    fun getTvData(): LiveData<ArrayList<TVShow>>{
+
+    fun getTvData(): LiveData<ArrayList<TVShow>> {
         tvList.postValue(TVShowData.listTV)
         return tvList
     }

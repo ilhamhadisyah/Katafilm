@@ -11,7 +11,7 @@ import com.ilham.moviesandtvshow.databinding.ActivitySettingBinding
 import java.util.*
 
 class Setting : AppCompatActivity() {
-    private lateinit var binding : ActivitySettingBinding
+    private lateinit var binding: ActivitySettingBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingBinding.inflate(layoutInflater)
@@ -20,9 +20,10 @@ class Setting : AppCompatActivity() {
         setUi()
         binding.changeLanguageView.setOnClickListener(clickListener)
     }
+
     private val clickListener = View.OnClickListener {
-        when(it.id){
-            R.id.change_language_view->{
+        when (it.id) {
+            R.id.change_language_view -> {
                 val setting = Intent(Settings.ACTION_LOCALE_SETTINGS)
                 startActivity(setting)
                 onPause()
@@ -30,14 +31,14 @@ class Setting : AppCompatActivity() {
         }
     }
 
-    private fun setUi(){
+    private fun setUi() {
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             title = getString(R.string.action_settings)
         }
-        val lang_id = Locale.getDefault().language
+        val langId = Locale.getDefault().language
         binding.apply {
-            languageId.text = lang_id
+            languageId.text = langId
         }
     }
 

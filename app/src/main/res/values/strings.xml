@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">Movies And TV Show</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name" translatable="false">Netplix</string>
     <string name="movie">Movie</string>
     <string name="tv">TV Show</string>
     <string name="trending_now">Trending Now</string>

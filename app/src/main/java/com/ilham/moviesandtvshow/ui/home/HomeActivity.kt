@@ -46,7 +46,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
-        inflater.inflate(R.menu.menu_detail,menu)
+        inflater.inflate(R.menu.menu_detail, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -61,12 +61,12 @@ class HomeActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.action_settings->{
-                val intent = Intent(this,Setting::class.java)
+        when (item.itemId) {
+            R.id.action_settings -> {
+                val intent = Intent(this, Setting::class.java)
                 startActivity(intent)
             }
-            android.R.id.home->{
+            android.R.id.home -> {
                 super.onBackPressed()
             }
         }

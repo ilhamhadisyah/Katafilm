@@ -31,9 +31,9 @@
                 <ImageView
                     android:id="@+id/poster_image"
                     android:layout_width="match_parent"
+                    android:background="@color/grey_light"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/poster_serenity" />
+                    android:scaleType="centerCrop" />
 
                 <FrameLayout
                     android:layout_width="match_parent"

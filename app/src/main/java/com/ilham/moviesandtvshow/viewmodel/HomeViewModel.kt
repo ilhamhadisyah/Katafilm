@@ -16,20 +16,14 @@ class HomeViewModel : ViewModel() {
     private val tvList = MutableLiveData<ArrayList<TVShow>>()
 
     fun getMovieData(): LiveData<ArrayList<Movie>> {
-        GlobalScope.launch {
-            delay(3000L)
-            movieList.postValue(MovieData.listMovie)
-        }
-
+        movieList.postValue(MovieData.listMovie)
         return movieList
 
 
     }
 
     fun getTvData(): LiveData<ArrayList<TVShow>> {
-        GlobalScope.launch {
-            tvList.postValue(TVShowData.listTV)
-        }
+        tvList.postValue(TVShowData.listTV)
         return tvList
     }
 }

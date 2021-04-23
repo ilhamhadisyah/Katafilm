@@ -41,21 +41,27 @@ class DetailViewModelTest {
     fun getMovieDataDetails() {
         val getFirstIndexData = MovieData.getMovieDetail(0)
         assertEquals(getFirstIndexData, movieViewModel.getMovieDataDetails(0).value)
+
         val getLastIndexData = MovieData.getMovieDetail(MovieData.listMovie.size - 1)
         assertEquals(
             getLastIndexData,
             movieViewModel.getMovieDataDetails(MovieData.listMovie.size - 1).value
         )
+
+        assertEquals("Alita: Battle Angel",MovieData.listMovie[1].title)
     }
 
     @Test
     fun getTVDataDetails() {
         val getFirstIndexData = TVShowData.getTvDetail(0)
         assertEquals(getFirstIndexData, tvViewModel.getTVDataDetails(0).value)
+
         val getLastIndexData = TVShowData.getTvDetail(TVShowData.listTV.size - 1)
         assertEquals(
             getLastIndexData,
             tvViewModel.getTVDataDetails(TVShowData.listTV.size - 1).value
         )
+
+        assertEquals("Riverdale",TVShowData.listTV[13].title)
     }
 }

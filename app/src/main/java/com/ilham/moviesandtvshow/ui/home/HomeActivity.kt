@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.tabs.TabLayoutMediator
@@ -41,7 +42,6 @@ class HomeActivity : AppCompatActivity() {
             setCustomView(R.layout.custom_action_bar)
             elevation = 3f
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

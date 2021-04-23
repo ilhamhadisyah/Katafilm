@@ -12,6 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/content_placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <include layout="@layout/shimmer_detail_activity_content"/>
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
         <LinearLayout
             android:id="@+id/content_container"
@@ -41,17 +51,17 @@
                     android:id="@+id/language"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
                     android:background="@drawable/language_item_template"
                     android:padding="2dp"
+                    android:layout_margin="2dp"
                     android:text="@string/language"
                     android:textColor="@color/grey_light"
-                    app:layout_constraintBottom_toBottomOf="@+id/content_movie_title"
                     app:layout_constraintStart_toEndOf="@+id/content_movie_title"
-                    app:layout_constraintTop_toTopOf="@+id/content_movie_title" />
+                    app:layout_constraintTop_toTopOf="@id/content_movie_title"
+                    app:layout_constraintBottom_toBottomOf="@id/content_movie_title"/>
 
                 <TextView
-                    android:id="@+id/release_year"
+                    android:id="@+id/year_release_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="5dp"
@@ -61,15 +71,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/content_movie_title" />
 
                 <LinearLayout
-                    android:id="@+id/linearLayout2"
+                    android:id="@+id/cc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
                     android:orientation="horizontal"
                     android:paddingTop="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/release_year"
-                    app:layout_constraintTop_toBottomOf="@+id/release_year">
+                    app:layout_constraintStart_toStartOf="@+id/year_release_detail"
+                    app:layout_constraintTop_toBottomOf="@id/year_release_detail">
 
                     <TextView
                         android:id="@+id/content_movie_genre"
@@ -104,9 +112,9 @@
                     android:id="@+id/movie_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_baseline_star_24"
                     android:text="8.7"
-                    app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+                    app:drawableStartCompat="@drawable/ic_baseline_star_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/cc"
                     app:layout_constraintEnd_toEndOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -142,8 +150,8 @@
                     android:layout_marginTop="20dp"
                     android:text="@string/lorem_ipsum" />
             </LinearLayout>
-
         </LinearLayout>
+
     </LinearLayout>
 
 

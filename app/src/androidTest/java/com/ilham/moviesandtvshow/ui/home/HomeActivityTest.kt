@@ -23,7 +23,6 @@ class HomeActivityTest {
     @get:Rule
     var activityRule = ActivityScenarioRule(HomeActivity::class.java)
 
-
     @Test
     fun tabMovingTest() {
         onView(withId(R.id.tabs)).check(matches(isDisplayed()))
@@ -65,10 +64,10 @@ class HomeActivityTest {
         onView(withId(R.id.content_movie_title)).check(matches(isDisplayed()))
         onView(withId(R.id.content_movie_age)).check(matches(isDisplayed()))
         onView(withId(R.id.language)).check(matches(isDisplayed()))
-        onView(withId(R.id.release_year)).check(matches(isDisplayed()))
+        onView(withId(R.id.poster_image)).check(matches(isDisplayed()))
         onView(withId(R.id.content_movie_genre)).check(matches(isDisplayed()))
         onView(withId(R.id.movie_rating)).check(matches(isDisplayed()))
-        onView(withId(R.id.movie_overview)).check(matches(isDisplayed()))
+        onView(withId(R.id.year_release_detail)).check(matches(isDisplayed()))
     }
 
     private fun selectTabAt(tabIndex: Int): ViewAction {

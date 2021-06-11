@@ -5,35 +5,35 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatDelegate
-import com.google.android.material.tabs.TabLayoutMediator
-import com.google.android.material.tabs.TabLayout
-import androidx.viewpager2.widget.ViewPager2
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ilham.moviesandtvshow.R
-import com.ilham.moviesandtvshow.databinding.ActivityHomeBinding
 import com.ilham.moviesandtvshow.ui.setting.Setting
+import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
-    companion object {
-        private val TAB_TITLES = intArrayOf(
-            R.string.movie,
-            R.string.tv
-        )
-    }
-
-    private lateinit var binding: ActivityHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_home)
 
         //set dark mode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
-        //TabLayout inflate
-        setTabLayoutAndPager()
+        //navBar inflate
+        val navView: BottomNavigationView = nav_view
+        val navController = findNavController(R.id.nav_host)
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.movie, R.id.tv_show, R.id.liked_list
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
 
         //custom action bar
         supportActionBar?.apply {
@@ -50,15 +50,6 @@ class HomeActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    private fun setTabLayoutAndPager() {
-        val viewPagerAdapter = HomePagerAdapter(this)
-        val viewPager: ViewPager2 = binding.viewPager
-        viewPager.adapter = viewPagerAdapter
-        val tabs: TabLayout = binding.tabs
-        TabLayoutMediator(tabs, viewPager) { tab, position ->
-            tab.text = resources.getString(TAB_TITLES[position])
-        }.attach()
-    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

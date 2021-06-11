@@ -1,42 +1,64 @@
 package com.ilham.moviesandtvshow.ui.home
 
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.Espresso.pressBack
-import androidx.test.espresso.PerformException
-import androidx.test.espresso.UiController
-import androidx.test.espresso.ViewAction
+import androidx.test.core.app.ActivityScenario
+import androidx.test.espresso.Espresso.*
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
-import com.google.android.material.tabs.TabLayout
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.LargeTest
 import com.ilham.moviesandtvshow.R
-import com.ilham.moviesandtvshow.data.MovieData
-import org.hamcrest.CoreMatchers.allOf
+import com.ilham.moviesandtvshow.utils.EspressoIdlingRes
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
+@LargeTest
 class HomeActivityTest {
+
+    @Before
+    fun setUp() {
+        ActivityScenario.launch(HomeActivity::class.java)
+        IdlingRegistry.getInstance().register(EspressoIdlingRes.countingIdlingResource)
+    }
+
+    @After
+    fun tearDown() {
+        IdlingRegistry.getInstance().unregister(EspressoIdlingRes.countingIdlingResource)
+    }
+
+
     @get:Rule
     var activityRule = ActivityScenarioRule(HomeActivity::class.java)
 
-    @Test
-    fun tabMovingTest() {
-        onView(withId(R.id.tabs)).check(matches(isDisplayed()))
-        onView(withId(R.id.tabs)).perform(selectTabAt(1))
-        onView(withId(R.id.tabs)).perform(selectTabAt(0))
-        onView(withId(R.id.tabs)).perform(selectTabAt(1))
-        onView(withId(R.id.tabs)).perform(selectTabAt(0))
-    }
 
     @Test
-    fun openMovie() {
+    fun tabMovingTestAndScrollTest() {
+        onView(withId(R.id.nav_view)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_show)).perform(click())
+        onView(withId(R.id.rv_tv_show)).perform(
+            RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
+                10
+            )
+        )
+        onView(withId(R.id.rv_tv_show)).perform(
+            RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
+                0
+            )
+        )
+
+        onView(withId(R.id.liked_list)).perform(click())
+        onView(withId(R.id.movie)).perform(click())
         onView(withId(R.id.rv_movie)).perform(
             RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
-                MovieData.listMovie.size
+                10
             )
         )
         onView(withId(R.id.rv_movie)).perform(
@@ -44,48 +66,133 @@ class HomeActivityTest {
                 0
             )
         )
+
+    }
+
+    @Test
+    fun openMovieDetail() {
+        onView(withId(R.id.movie)).perform(click())
+        onView(withText("Now Playing")).check(matches(isDisplayed()))
         onView(withId(R.id.rv_movie)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 0,
                 click()
             )
         )
+
+        onView(withId(R.id.content_movie_title)).check(matches(isDisplayed()))
+        onView(withId(R.id.vote_average)).check(matches(isDisplayed()))
+        onView(withId(R.id.backdrop_image)).check(matches(isDisplayed()))
+        onView(withId(R.id.year_release_detail)).check(matches(isDisplayed()))
+        onView(withId(R.id.movie_overview)).check(matches(isDisplayed()))
         pressBack()
     }
 
     @Test
-    fun checkItemIsDisplayed() {
-        onView(withId(R.id.rv_movie)).perform(
+    fun openTvDetail() {
+        onView(withId(R.id.tv_show)).perform(click())
+        onView(withText("Popular")).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_tv_show)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 0,
                 click()
             )
         )
         onView(withId(R.id.content_movie_title)).check(matches(isDisplayed()))
-        onView(withId(R.id.content_movie_age)).check(matches(isDisplayed()))
-        onView(withId(R.id.language)).check(matches(isDisplayed()))
-        onView(withId(R.id.poster_image)).check(matches(isDisplayed()))
-        onView(withId(R.id.content_movie_genre)).check(matches(isDisplayed()))
-        onView(withId(R.id.movie_rating)).check(matches(isDisplayed()))
+        onView(withId(R.id.vote_average)).check(matches(isDisplayed()))
+        onView(withId(R.id.backdrop_image)).check(matches(isDisplayed()))
         onView(withId(R.id.year_release_detail)).check(matches(isDisplayed()))
+        onView(withId(R.id.movie_overview)).check(matches(isDisplayed()))
+        pressBack()
     }
 
-    private fun selectTabAt(tabIndex: Int): ViewAction {
-        return object : ViewAction {
-            override fun getDescription() = "with tab at index $tabIndex"
 
-            override fun getConstraints() =
-                allOf(isDisplayed(), isAssignableFrom(TabLayout::class.java))
-
-            override fun perform(uiController: UiController, view: View) {
-                val tabLayout = view as TabLayout
-                val tabAtIndex: TabLayout.Tab = tabLayout.getTabAt(tabIndex)
-                    ?: throw PerformException.Builder()
-                        .withCause(Throwable("No tab at index $tabIndex"))
-                        .build()
-
-                tabAtIndex.select()
-            }
-        }
+    @Test
+    fun addMovieToLike(){
+        onView(withId(R.id.movie)).perform(click())
+        onView(withId(R.id.rv_movie)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                0,
+                click()
+            )
+        )
+        onView(withId(R.id.add_to_like)).perform(click())
     }
+
+    @Test
+    fun addTvShowToLike(){
+        onView(withId(R.id.tv_show)).perform(click())
+        onView(withId(R.id.rv_tv_show)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                0,
+                click()
+            )
+        )
+        onView(withId(R.id.add_to_like)).perform(click())
+    }
+
+    @Test
+    fun openLikedList() {
+        onView(withId(R.id.liked_list)).perform(click())
+
+        onView(withId(R.id.menu_spinner)).perform(click())
+        onView(withText("Movie")).perform(click())
+        onView(withId(R.id.rv_liked_list)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.menu_spinner)).perform(click())
+        onView(withText("TV Show")).perform(click())
+        onView(withId(R.id.rv_liked_list)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun deleteItemInMovieLikedList(){
+        onView(withId(R.id.movie)).perform(click())
+        onView(withId(R.id.rv_movie)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                2,
+                click()
+            )
+        )
+        onView(withId(R.id.add_to_like)).perform(click())
+        pressBack()
+        onView(withId(R.id.liked_list)).perform(click())
+
+        onView(withId(R.id.menu_spinner)).perform(click())
+        onView(withText("Movie")).perform(click())
+        onView(withId(R.id.rv_liked_list)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                0,
+                click()
+            )
+        )
+        onView(withId(R.id.add_to_like)).perform(click())
+        pressBack()
+    }
+
+    @Test
+    fun deleteItemInTvShowLikedList(){
+        onView(withId(R.id.tv_show)).perform(click())
+        onView(withId(R.id.rv_tv_show)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                2,
+                click()
+            )
+        )
+        onView(withId(R.id.add_to_like)).perform(click())
+        pressBack()
+        onView(withId(R.id.liked_list)).perform(click())
+
+        onView(withId(R.id.menu_spinner)).perform(click())
+        onView(withText("TV Show")).perform(click())
+        onView(withId(R.id.rv_liked_list)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                0,
+                click()
+            )
+        )
+        onView(withId(R.id.add_to_like)).perform(click())
+        pressBack()
+    }
+
+
 }

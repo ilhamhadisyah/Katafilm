@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/movie"
+        android:icon="@drawable/ic_clapperboard"
+        android:title="@string/movie" />
+    <item
+        android:id="@+id/tv_show"
+        android:icon="@drawable/ic_television"
+        android:title="TV show" />
+    <item
+        android:id="@+id/liked_list"
+        android:icon="@drawable/ic_baseline_favorite_24_black"
+        android:title="Liked" />
+
+</menu>

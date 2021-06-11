@@ -10,7 +10,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
+        android:layout_height="250dp"
         android:fitsSystemWindows="true"
         android:theme="@style/Theme.MoviesAndTVShow.AppBarOverlay">
 
@@ -23,25 +23,34 @@
             app:expandedTitleTextAppearance="@style/ExpandedTitle"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar">
-
-            <FrameLayout
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/image_placeholder"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <include layout="@layout/poster_image_placeholder"/>
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
 
+            <FrameLayout
+                android:id="@+id/poster_image_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
                 <ImageView
-                    android:id="@+id/poster_image"
-                    android:layout_width="match_parent"
-                    android:background="@color/grey_light"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop" />
-
-                <FrameLayout
+                    android:id="@+id/backdrop_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="200dp"
-                    android:background="@drawable/gradient_poster_overlay">
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/poster_image" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/gradient_poster_overlay" />
 
-                </FrameLayout>
+
             </FrameLayout>
 
             <androidx.appcompat.widget.Toolbar
@@ -57,4 +66,16 @@
     <include
         android:id="@+id/child"
         layout="@layout/detail_activity_content" />
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/add_to_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20sp"
+        android:backgroundTint="@color/red_tab_selected"
+        android:text="Like"
+        android:textColor="@color/white"
+        android:drawableEnd="@drawable/ic_baseline_favorite_border_24"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="bottom|end"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

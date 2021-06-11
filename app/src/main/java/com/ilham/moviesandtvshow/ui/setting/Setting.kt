@@ -7,18 +7,16 @@ import android.provider.Settings
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import com.ilham.moviesandtvshow.R
-import com.ilham.moviesandtvshow.databinding.ActivitySettingBinding
+import kotlinx.android.synthetic.main.activity_setting.*
 import java.util.*
 
 class Setting : AppCompatActivity() {
-    private lateinit var binding: ActivitySettingBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySettingBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_setting)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         setUi()
-        binding.changeLanguageView.setOnClickListener(clickListener)
+        change_language_view.setOnClickListener(clickListener)
     }
 
     private val clickListener = View.OnClickListener {
@@ -37,9 +35,9 @@ class Setting : AppCompatActivity() {
             title = getString(R.string.action_settings)
         }
         val langId = Locale.getDefault().language
-        binding.apply {
-            languageId.text = langId
-        }
+
+        language_id.text = langId
+
     }
 
     override fun onResume() {

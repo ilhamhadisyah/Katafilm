@@ -2,21 +2,31 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id "org.sonarqube" version "3.5.0.2730"
 }
 apply plugin: 'kotlin-kapt'
+
+sonarqube {
+    properties{
+        property "sonar.projectKey", "Project1"
+        property "sonar.host.url", "http://127.0.0.1:9000"
+        property "sonar.login", "admin"
+        property "sonar.password", "Ilhamhadi123"
+    }
+}
+
 
 android {
     testOptions {
         unitTests.returnDefaultValues = true
     }
 
-    compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.ilham.moviesandtvshow"
         minSdkVersion 27
-        targetSdkVersion 30
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
@@ -36,6 +46,7 @@ android {
     testOptions {
         unitTests.returnDefaultValues = true
     }
+    compileSdk 28
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

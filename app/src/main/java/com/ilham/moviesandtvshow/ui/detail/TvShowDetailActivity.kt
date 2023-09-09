@@ -6,7 +6,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
@@ -16,8 +15,8 @@ import com.ilham.moviesandtvshow.BuildConfig
 import com.ilham.moviesandtvshow.AppBase
 import com.ilham.moviesandtvshow.R
 import com.ilham.moviesandtvshow.data.models.TVShowModel
+import com.ilham.moviesandtvshow.data.repositories.DataRepositories
 import com.ilham.moviesandtvshow.data.repositories.Resource
-import com.ilham.moviesandtvshow.di.ViewModelFactory
 import com.ilham.moviesandtvshow.utils.Constants
 import com.ilham.moviesandtvshow.utils.DateUtilities
 import kotlinx.android.synthetic.main.activity_tv_detail.*
@@ -30,12 +29,9 @@ import kotlinx.android.synthetic.main.detail_activity_content.view.*
 import javax.inject.Inject
 
 class TvShowDetailActivity : AppCompatActivity() {
-    @Inject
-    lateinit var factory: ViewModelFactory
 
-    private val tvShowDetailViewModel: TVShowDetailViewModel by viewModels {
-        factory
-    }
+    @Inject
+    lateinit var repo : DataRepositories
 
     companion object {
         const val EXTRA_MOVIE_DATA = "extra_movie_data"
@@ -50,7 +46,7 @@ class TvShowDetailActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
         val tvId = intent.getIntExtra(EXTRA_MOVIE_DATA,0)
-        tvShowDetailViewModel.getTvShowDetail(tvId).observe(this, Observer {
+        repo.getTvShowDetail(tvId).observe(this, Observer {
             tvShow->
             if (tvShow != null) {
                 when (tvShow) {
@@ -126,7 +122,7 @@ class TvShowDetailActivity : AppCompatActivity() {
         setLikeStatus(likeStatus)
         add_to_like.setOnClickListener {
             likeStatus = !likeStatus
-            tvShowDetailViewModel.setFavTv(tvShowModel, likeStatus)
+            repo.setFavouriteTVShow(tvShowModel, likeStatus)
             setLikeStatus(likeStatus)
             Toast.makeText(this@TvShowDetailActivity, "Yaaaa", Toast.LENGTH_SHORT).show()
         }

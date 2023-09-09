@@ -7,27 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ilham.moviesandtvshow.AppBase
 import com.ilham.moviesandtvshow.R
 import com.ilham.moviesandtvshow.data.models.TVShowModel
+import com.ilham.moviesandtvshow.data.repositories.DataRepositories
 import com.ilham.moviesandtvshow.data.repositories.Resource
-import com.ilham.moviesandtvshow.di.ViewModelFactory
 import com.ilham.moviesandtvshow.ui.home.adapter.TVShowPagedAdapter
 import kotlinx.android.synthetic.main.fragment_t_v_show.*
 import javax.inject.Inject
 
 class TVShowFragment : Fragment() {
-
     @Inject
-    lateinit var factory: ViewModelFactory
-
-    private val tvShowViewModel: TVShowViewModel by viewModels {
-        factory
-    }
+    lateinit var repo : DataRepositories
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +42,12 @@ class TVShowFragment : Fragment() {
         val adapter = TVShowPagedAdapter()
         rv_tv_show.adapter = adapter
         rv_tv_show.hasFixedSize()
-        tvShowViewModel.getTVData(1).observe(viewLifecycleOwner, Observer { tvShow ->
+//        val result = repo.getPopularTV(1)
+//        if (result.value == "Error"){
+//
+//        }
+
+        repo.getPopularTV(1).observe(viewLifecycleOwner, Observer { tvShow ->
             if (tvShow != null) {
                 when (tvShow) {
                     is Resource.Success -> {

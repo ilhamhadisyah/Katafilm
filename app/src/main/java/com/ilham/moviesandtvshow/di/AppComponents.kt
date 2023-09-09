@@ -10,9 +10,8 @@ import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
-
 @Singleton
-@Component(modules = [ViewModelModule::class, AppModule::class])
+@Component(modules = [AppModule::class])
 interface AppComponents {
     @Component.Factory
     interface Factory {

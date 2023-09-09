@@ -6,19 +6,17 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
-import androidx.paging.PagedList
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
 import com.ilham.moviesandtvshow.BuildConfig
 import com.ilham.moviesandtvshow.AppBase
 import com.ilham.moviesandtvshow.R
 import com.ilham.moviesandtvshow.data.models.MovieModel
+import com.ilham.moviesandtvshow.data.repositories.DataRepositories
 import com.ilham.moviesandtvshow.data.repositories.Resource
-import com.ilham.moviesandtvshow.di.ViewModelFactory
 import com.ilham.moviesandtvshow.utils.Constants
 import com.ilham.moviesandtvshow.utils.DateUtilities
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -26,13 +24,8 @@ import kotlinx.android.synthetic.main.detail_activity_content.view.*
 import javax.inject.Inject
 
 class DetailActivity : AppCompatActivity() {
-
     @Inject
-    lateinit var factory: ViewModelFactory
-
-    private val detailViewModel: DetailViewModel by viewModels {
-        factory
-    }
+    lateinit var repo : DataRepositories
 
     companion object {
         const val EXTRA_MOVIE_DATA = "extra_movie_data"
@@ -49,7 +42,7 @@ class DetailActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val movieId = intent.getIntExtra(EXTRA_MOVIE_DATA,0)
-        detailViewModel.getMovieDetail(movieId).observe(this, Observer { movie ->
+        repo.getMovieDetail(movieId).observe(this, Observer { movie ->
             if (movie != null) {
                 when (movie) {
                     is Resource.Success -> {
@@ -125,7 +118,7 @@ class DetailActivity : AppCompatActivity() {
         setLikeStatus(likeStatus)
         add_to_like.setOnClickListener {
             likeStatus = !likeStatus
-            detailViewModel.setFavMovie(movie, likeStatus)
+            repo.setFavouriteMovie(movie, likeStatus)
             setLikeStatus(likeStatus)
             Toast.makeText(this@DetailActivity, "Yaaaa", Toast.LENGTH_SHORT).show()
         }

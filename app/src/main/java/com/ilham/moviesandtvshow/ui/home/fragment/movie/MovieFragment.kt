@@ -7,28 +7,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ilham.moviesandtvshow.AppBase
 import com.ilham.moviesandtvshow.R
 import com.ilham.moviesandtvshow.data.models.MovieModel
+import com.ilham.moviesandtvshow.data.repositories.DataRepositories
 import com.ilham.moviesandtvshow.data.repositories.Resource
-import com.ilham.moviesandtvshow.di.ViewModelFactory
 import com.ilham.moviesandtvshow.ui.home.adapter.MoviePagedAdapter
 import kotlinx.android.synthetic.main.fragment_movie.*
 import javax.inject.Inject
 
 
-class MovieFragment : Fragment() {
+class MovieFragment() : Fragment() {
 
     @Inject
-    lateinit var factory: ViewModelFactory
-
-    private val movieViewModel: MovieViewModel by viewModels {
-        factory
-    }
+    lateinit var repo : DataRepositories
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +43,7 @@ class MovieFragment : Fragment() {
         val adapter = MoviePagedAdapter()
         rv_movie.adapter = adapter
         rv_movie.hasFixedSize()
-        movieViewModel.getDataMovie(1).observe(viewLifecycleOwner, Observer { movie ->
+        repo.getNowPlayingMovies(1).observe(viewLifecycleOwner, Observer { movie ->
             if (movie != null) {
                 when (movie) {
                     is Resource.Success -> {
@@ -65,7 +60,6 @@ class MovieFragment : Fragment() {
             }
         })
     }
-
     private fun showList(listMovie: PagedList<MovieModel>, adapter: MoviePagedAdapter) {
         adapter.submitList(listMovie)
         adapter.notifyDataSetChanged()

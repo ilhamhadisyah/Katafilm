@@ -10,7 +10,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,8 +17,8 @@ import com.ilham.moviesandtvshow.AppBase
 import com.ilham.moviesandtvshow.R
 import com.ilham.moviesandtvshow.data.models.MovieModel
 import com.ilham.moviesandtvshow.data.models.TVShowModel
+import com.ilham.moviesandtvshow.data.repositories.DataRepositories
 import com.ilham.moviesandtvshow.data.repositories.Resource
-import com.ilham.moviesandtvshow.di.ViewModelFactory
 import com.ilham.moviesandtvshow.ui.home.adapter.LikedListMovieAdapter
 import com.ilham.moviesandtvshow.ui.home.adapter.LikedListTVShowAdapter
 import kotlinx.android.synthetic.main.fragment_liked_list.*
@@ -28,17 +27,11 @@ import javax.inject.Inject
 class LikedListFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     @Inject
-    lateinit var factory: ViewModelFactory
-
-    private val likedListViewModel: LikedListViewModel by viewModels {
-        factory
-    }
-
+    lateinit var repo : DataRepositories
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_liked_list, container, false)
     }
 
@@ -66,7 +59,7 @@ class LikedListFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private fun observeMovie() {
         val adapter = LikedListMovieAdapter()
         rv_liked_list.adapter = adapter
-        likedListViewModel.getLikedMovie(1).observe(viewLifecycleOwner, Observer { movie ->
+        repo.getFavouriteMovies().observe(viewLifecycleOwner, Observer { movie ->
             if (movie != null) {
                 when (movie) {
                     is Resource.Success -> {
@@ -88,7 +81,7 @@ class LikedListFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private fun observeTvShow() {
         val adapter = LikedListTVShowAdapter()
         rv_liked_list.adapter = adapter
-        likedListViewModel.getLikedTVShow(1).observe(viewLifecycleOwner, Observer { movie ->
+        repo.getFavouriteTVShow().observe(viewLifecycleOwner, Observer { movie ->
             if (movie != null) {
                 when (movie) {
                     is Resource.Success -> {
